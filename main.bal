@@ -17,6 +17,16 @@ type Claim record {|
 # + withinPolicy - Whether the claim follows the expense policy
 # + riskLevel - LOW, MEDIUM or HIGH
 # + reasoning - Why, in one or two sentences, shown to the reviewer
+// The ai module builds no schema at runtime for a record `resultType`, so it is declared here.
+@ai:JsonSchema {
+    'type: "object",
+    properties: {
+        withinPolicy: {'type: "boolean"},
+        riskLevel: {'type: "string", 'enum: ["LOW", "MEDIUM", "HIGH"]},
+        reasoning: {'type: "string"}
+    },
+    required: ["withinPolicy", "riskLevel", "reasoning"]
+}
 type PolicyAssessment record {|
     boolean withinPolicy;
     string riskLevel;
